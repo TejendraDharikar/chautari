@@ -27,6 +27,7 @@ const Login = () => {
     onSuccess: (data) => {
       console.log("Login success:", data);
        navigate("/");
+       
     },
     onError: (err: Error) => {
       console.error("Login error:", err.message);
