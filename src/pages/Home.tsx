@@ -2,6 +2,8 @@ import { useQuery, useQueryClient } from "@tanstack/react-query";
 import { fetchPosts } from "../api/pageapi";
 import { useAuthStore } from "../store/useAuthStore";
 import { useNavigate } from "react-router-dom";
+import Sidebar from "../components/Sidebar";
+import { IoLogInOutline , IoLogOutOutline } from "react-icons/io5";
 
 const Home = () => {
 const {isLoggedIn,login}=useAuthStore();
@@ -10,7 +12,8 @@ const navigate=useNavigate();
    const queryClient = useQueryClient();
 
 const handleLogin=()=>{
-  login();
+  // Replace 'yourTokenHere' with the actual token value you want to use
+  login("yourTokenHere");
   navigate("/login");
 };
 
@@ -35,24 +38,29 @@ const handleLogout=()=>{
     );
 
   return (
+   
     <div className="min-h-screen bg-gray-50">
-      <div className="flex justify-end items-center p-4 bg-white shadow-md">
+       
+       <div className="flex justify-between   text-white bg-gray-300 shadow-md">
+        <Sidebar/>
+      <div className=" h-20 w-15 p-4 ">
  {!isLoggedIn?(
         <button 
         onClick={handleLogin}
-       className="px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700 transition"
-
-        >LOGIN</button>
+       className="px-1 py-3  text-black text-3xl hover:bg-blue-500 rounded-md"
+        title="Login"
+        > <IoLogInOutline /></button>
       ) : (
         <button
           onClick={handleLogout}
-          className="px-4 py-2 bg-red-500 text-white rounded hover:bg-red-600 transition"
-
+          className="px-1 py-3 text-black text-3xl hover:bg-red-500 rounded-md"
+          title="Logout"
         >
-          LOGOUT
+         <IoLogOutOutline />
         </button>
       )}
       </div>
+       </div>
      
 
       <h1 className="text-2xl font-bold text-center"> Latest Posts</h1>

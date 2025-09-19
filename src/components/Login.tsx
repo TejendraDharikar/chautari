@@ -5,6 +5,9 @@ import { z } from "zod";
 import { loginUser } from "../api/formapi";
 import { useMutation } from "@tanstack/react-query";
 import { useNavigate } from "react-router-dom";
+import { useAuthStore } from "../store/useAuthStore";
+
+
 
 export const loginSchema = z.object({
   username: z.string().min(3, "Username is required"),
@@ -22,12 +25,17 @@ const Login = () => {
     formState: { errors },
   } = useForm<LoginFormData>({ resolver: zodResolver(loginSchema) });
 
+  const { login } = useAuthStore();
+
   const { mutate, isPending, isError, error } = useMutation({
     mutationFn: loginUser,
     onSuccess: (data) => {
+      const token = data.data.token;
+      login(token);
       console.log("Login success:", data);
        navigate("/");
        
+
     },
     onError: (err: Error) => {
       console.error("Login error:", err.message);
