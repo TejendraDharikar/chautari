@@ -1,10 +1,13 @@
 import { useQuery } from "@tanstack/react-query";
 import { fetchMyProfile } from "../api/pageapi";
 import { useNavigate } from "react-router-dom";
-import Sidebar from "../components/Sidebar";
+import Sidebar from "../components/navbar";
+import Back from "../components/Back";
 
-const Profile = () => {
+
+const MyProfile = () => {
   const navigate = useNavigate();
+ 
 
   const { data, isLoading, isError, error } = useQuery({
     queryKey: ["myProfile"],
@@ -15,6 +18,7 @@ const Profile = () => {
   if (isError)return <p className="text-center text-red-500">Error: {error.message} </p>;
 
 const profile=data?.data;
+
 
   return (<div><Sidebar/>
 <div className="max-w-3xl mx-auto mt-10 space-y-6">
@@ -35,7 +39,7 @@ const profile=data?.data;
       {/* Profile Info */}
       <div className="mt-12 text-black text-center bg-white shadow-md p-6 rounded-lg">
         <h2 className="text-2xl font-bold">
-          {profile?.firstName?"Peter":profile.firstName} {profile?.lastName?"Parker":profile.lastName}
+          {profile?.firstName?profile.firstName:"Peter"} {profile?.lastName?profile.lastName:"Parker"}
         </h2>
 
          <p className="mt-2 text-lg text-black">
@@ -54,18 +58,23 @@ const profile=data?.data;
         <p className="text-black mt-5 mb-[-15px]">Updated:{profile?.updatedAt
     ? new Date(profile.updatedAt).toLocaleString(undefined, {
       year:'numeric', month: 'short', day: '2-digit',
-        // hour: '2-digit',
-        // minute: '2-digit',
-        // hour12: true,
+         hour: '2-digit',
+         hour12: true,
       })
     : 'No update time available'}</p>
-        <button
-          onClick={() => navigate("/settings")}
-          className="mt-4 px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700 transition"
-        >
-          Edit Profile
-        </button>
+       
+  <button
+    onClick={()=>navigate("/editprofile")}
+    className="mt-4 px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700 transition"
+  >
+    Edit Profile
+  </button>
+
+
       </div>
+    </div>
+  <div className="max-w-3xl mx-auto mt-10">
+    <Back/>
     </div>
   </div>
     
@@ -73,4 +82,4 @@ const profile=data?.data;
 
 }
 
-export default Profile
+export default MyProfile

@@ -3,11 +3,12 @@ import { NavLink } from "react-router-dom";
 const Sidebar = () => {
   return (
     <div>
-      <nav className="flex items-center justify-between w-333 p-4 ">
+      <nav className="flex items-center justify-between xl:w-315 lg:w-150 sm:w-75   p-4 ">
         <NavLink to={"/"} className="text-xl font-bold text-blue-600">
           Chautari
         </NavLink>
-        <div className="flex items-center gap-40 text-sm font-medium text-gray-600">
+        <div className="flex items-center xl:gap-30 text-sm font-medium xl:mr-10
+        text-gray-600 sm:gap-12 sm:ml-7">
           <NavLink
             to="/"
             className={({ isActive }) =>
@@ -25,12 +26,12 @@ const Sidebar = () => {
             Bookmarks
           </NavLink>
           <NavLink
-            to="/settings"
+            to="/mypost"
             className={({ isActive }) =>
               isActive ? "text-blue-500 " : "hover:text-yellow-700 "
             }
           >
-            Settings
+            MyPost
           </NavLink>
           <NavLink
             to="/search"
@@ -41,12 +42,12 @@ const Sidebar = () => {
             Search
           </NavLink>
           <NavLink
-            to="/Profile"
+            to="/myProfile"
           >
             <img
               src="../t-image.jpg"
               alt="#"
-              className="h-15 w-15 border-4 border-gray-500 rounded-full mt-1 ml-1"
+              className="xl:h-15 xl:w-15 border-4 border-gray-500 rounded-full mt-1 ml-1 sm:h-10 sm:border-1 sm:w-20"
             />
           </NavLink>
         </div>

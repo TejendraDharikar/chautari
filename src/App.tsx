@@ -3,10 +3,13 @@ import "./App.css";
 import Home from "./pages/Home";
 import Login from "./components/Login";
 import Register from "./components/Register";
-import Profile from "./pages/Profile";
-import Post from "./pages/Post";
-import Setting from "./pages/Setting";
+import Post from "./pages/AddPost";
+import Setting from "./pages/MyPost";
 import Bookmarks from "./pages/Bookmarks";
+import MyProfile from "./pages/MyProfile";
+import EditProfile from "./pages/EditProfile";
+import MyPost from "./pages/MyPost";
+import AddPost from "./pages/AddPost";
 const router = createBrowserRouter([
   {
     path: "/",
@@ -21,16 +24,24 @@ const router = createBrowserRouter([
     element: <Register />,
   },
   {
-    path: "/profile",
-    element: <Profile />,
+    path: "/myprofile",
+    element: <MyProfile />,
+  },
+  {
+    path: "/editprofile",
+    element: <EditProfile />,
   },
   {
     path: "/post/:id",
     element: <Post />,
   },
   {
-    path: "/settings",
-    element: <Setting />,
+    path: "/mypost",
+    element: <MyPost />,
+  },
+  {
+    path:"/addpost",
+    element:<AddPost/>
   },
   {
     path: "/bookmarks",
