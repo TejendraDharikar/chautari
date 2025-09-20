@@ -42,12 +42,11 @@ const Sidebar = () => {
           </NavLink>
           <NavLink
             to="/Profile"
-            className={({ isActive }) => (isActive ? "text-blue-500" : "")}
           >
             <img
               src="../t-image.jpg"
               alt="#"
-              className="h-15 w-15 border-2 border-blue-500 rounded-full mt-1 ml-1"
+              className="h-15 w-15 border-4 border-gray-500 rounded-full mt-1 ml-1"
             />
           </NavLink>
         </div>

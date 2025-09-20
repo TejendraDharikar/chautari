@@ -1,7 +1,7 @@
 import { useQuery } from "@tanstack/react-query";
 import { fetchMyProfile } from "../api/pageapi";
 import { useNavigate } from "react-router-dom";
-import { useAuthStore } from "../store/useAuthStore";
+import Sidebar from "../components/Sidebar";
 
 const Profile = () => {
   const navigate = useNavigate();
@@ -12,25 +12,53 @@ const Profile = () => {
   });
 
   if (isLoading) return <p className="text-center mt-10">Loading profile...</p>;
-  if (isError) return <p className="text-center text-red-500">Error: {error.message}</p>;
+  if (isError)return <p className="text-center text-red-500">Error: {error.message} </p>;
 
-  return (
-    <div className="max-w-3xl mx-auto mt-10 space-y-6">
+const profile=data?.data;
 
+  return (<div><Sidebar/>
+<div className="max-w-3xl mx-auto mt-10 space-y-6">
       {/* Cover Image */}
       <div className="relative">
-        
         <img
-          src={data.avatar}
+          src={profile?.coverImage|| "../t-image.jpg"}
+          alt="Cover"
+          className="w-full h-48 rounded-lg bg-orange-400 shadow-md"
+        />
+        <img
+          src={profile?.account?.avatar?.url ? "../t-image.jpg":profile.account.avatar.url  }
           alt="Avatar"
-          className="absolute left-4 bottom-[-30px] h-20 w-20 rounded-full border-4 border-white shadow-lg"
+          className="absolute left-4 bottom-[-30px] h-20 w-20 rounded-full border-4 border-white bg-yellow-400 shadow-lg"
         />
       </div>
 
       {/* Profile Info */}
-      <div className="mt-10 text-center">
-        <h2 className="text-2xl font-bold">{data.name}</h2>
-        <p className="text-gray-600">{data.bio}</p>
+      <div className="mt-12 text-black text-center bg-white shadow-md p-6 rounded-lg">
+        <h2 className="text-2xl font-bold">
+          {profile?.firstName?"Peter":profile.firstName} {profile?.lastName?"Parker":profile.lastName}
+        </h2>
+
+         <p className="mt-2 text-lg text-black">
+    {profile?.bio || "Hello, I'm a mysterious web developer!"}
+  </p>
+
+ <div className="flex  justify-center gap-4 mt-5 mb-5 text-md text-black font-semibold">
+        <h1>Following:{profile?.followingCount}</h1>
+        <h1 className="ml-4">Followers:{profile?.followersCount}</h1>
+        </div>
+
+  <p className="mt-2 text-md text-black">
+   Location: {profile?.location || "Unknown Location"}
+  </p>
+        
+        <p className="text-black mt-5 mb-[-15px]">Updated:{profile?.updatedAt
+    ? new Date(profile.updatedAt).toLocaleString(undefined, {
+      year:'numeric', month: 'short', day: '2-digit',
+        // hour: '2-digit',
+        // minute: '2-digit',
+        // hour12: true,
+      })
+    : 'No update time available'}</p>
         <button
           onClick={() => navigate("/settings")}
           className="mt-4 px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700 transition"
@@ -39,6 +67,8 @@ const Profile = () => {
         </button>
       </div>
     </div>
+  </div>
+    
   );
 
 }

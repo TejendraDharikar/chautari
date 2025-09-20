@@ -30,7 +30,7 @@ const Login = () => {
   const { mutate, isPending, isError, error } = useMutation({
     mutationFn: loginUser,
     onSuccess: (data) => {
-      const token = data.data.token;
+      const token = data.data.accessToken||data.data.token;
       login(token);
       console.log("Login success:", data);
        navigate("/");

@@ -8,7 +8,7 @@ export const fetchPosts = async () => {
 
 
 export const fetchMyProfile = async () => {
-  const token = JSON.parse(localStorage.getItem("token") || "null");
+  const token = localStorage.getItem("token") || "null";
 
   const res = await fetch("https://api.freeapi.app/api/v1/social-media/profile", {
     headers: {

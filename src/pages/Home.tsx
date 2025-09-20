@@ -6,21 +6,21 @@ import Sidebar from "../components/Sidebar";
 import { IoLogInOutline , IoLogOutOutline } from "react-icons/io5";
 
 const Home = () => {
-const {isLoggedIn,login}=useAuthStore();
+const {isLoggedIn,token,login}=useAuthStore();
  const logout = useAuthStore((state) => state.logout);
 const navigate=useNavigate();
    const queryClient = useQueryClient();
 
 const handleLogin=()=>{
   // Replace 'yourTokenHere' with the actual token value you want to use
-  login("yourTokenHere");
+  login(token ?? "")
   navigate("/login");
 };
 
 const handleLogout=()=>{
   logout();
    queryClient.clear();
-  navigate("/login");
+  navigate("/");
 }
 
   const { data, isLoading, isError, error } = useQuery({
