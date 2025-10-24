@@ -1,5 +1,5 @@
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
-import { fetchPosts, likePost } from "../api/pageapi";
+import { fetchPosts, likePost } from "../api/profileapi";
 import { useAuthStore } from "../store/useAuthStore";
 import { useNavigate } from "react-router-dom";
 import Sidebar from "../components/navbar";

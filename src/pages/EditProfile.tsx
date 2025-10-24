@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 import { useAuthStore } from "../store/useAuthStore";
 import { useMutation } from "@tanstack/react-query";
-import { updateProfile, type Profile } from "../api/pageapi";
+import { updateProfile, type Profile } from "../api/profileapi";
 import z from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";

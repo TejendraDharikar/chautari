@@ -1,5 +1,5 @@
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
-import { deletePost, fetchMyPost } from "../api/profilapi";
+import { deletePost, fetchMyPost } from "../api/postapi";
 import Sidebar from "../components/navbar";
 import { useNavigate } from "react-router-dom";
 

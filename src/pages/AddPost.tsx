@@ -1,6 +1,6 @@
 import { useForm } from "react-hook-form";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
-import { createPost } from "../api/profilapi";
+import { createPost } from "../api/postapi";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Back from "../components/Back";

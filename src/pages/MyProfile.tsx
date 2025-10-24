@@ -1,5 +1,5 @@
 import { useQuery } from "@tanstack/react-query";
-import { fetchMyProfile } from "../api/pageapi";
+import { fetchMyProfile } from "../api/profileapi";
 import { useNavigate } from "react-router-dom";
 import Sidebar from "../components/navbar";
 import Back from "../components/Back";
