@@ -1,14 +1,32 @@
-import { useQuery } from "@tanstack/react-query";
-import { fetchMyPost } from "../api/profileapi";
+import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
+import { deletePost, fetchMyPost } from "../api/profilapi";
 import Sidebar from "../components/navbar";
 import { useNavigate } from "react-router-dom";
 
 const MyPost = () => {
   const Navigate = useNavigate();
+
+  const queryClient = useQueryClient();
+  const deleteMutation = useMutation({
+    mutationFn: (postId: string) => deletePost(postId),
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ["posts"] });
+    },
+    onError: (err: Error) => {
+      alert(err.message || "Failed to delete post");
+    },
+  });
+
   const { data, isLoading, isError, error } = useQuery({
     queryKey: ["posts"],
     queryFn: fetchMyPost,
   });
+
+  const handleDelete = (postId: string) => {
+    if (confirm("Are you sure you want to delete this post?")) {
+      deleteMutation.mutate(postId);
+    }
+  };
 
   if (isLoading)
     return <div className="text-center mt-10">Loading posts...</div>;
@@ -85,6 +103,9 @@ const MyPost = () => {
               </div>
               <div className="flex justify-center gap-10 mt-3 text-gray-600">
                 <h2> LIKES {post?.likes}</h2>
+                <h2> COMMENTS {post?.comments?.length || 0}</h2>
+                <button>EDIT</button>
+                <button onClick={() => handleDelete(post._id)}>DELETE</button>
               </div>
             </div>
           ))

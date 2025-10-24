@@ -4,7 +4,6 @@ import Home from "./pages/Home";
 import Login from "./components/Login";
 import Register from "./components/Register";
 import Post from "./pages/AddPost";
-import Setting from "./pages/MyPost";
 import Bookmarks from "./pages/Bookmarks";
 import MyProfile from "./pages/MyProfile";
 import EditProfile from "./pages/EditProfile";

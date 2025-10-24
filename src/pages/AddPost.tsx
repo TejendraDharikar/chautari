@@ -1,8 +1,9 @@
 import { useForm } from "react-hook-form";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
-import { createPost } from "../api/profileapi";
+import { createPost } from "../api/profilapi";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import Back from "../components/Back";
 
 const AddPost = () => {
   const navigate = useNavigate();
@@ -37,16 +38,26 @@ const AddPost = () => {
   };
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)} className="max-w-md mx-auto p-6 bg-white shadow rounded space-y-4">
+    <form
+      onSubmit={handleSubmit(onSubmit)}
+      className="max-w-md mx-auto p-6 bg-white shadow rounded space-y-4"
+    >
+      <Back />
       <h2 className="text-xl font-bold text-center">Create Post</h2>
       <label className="block text-sm font-medium text-gray-700">Content</label>
-      <input {...register("content")} placeholder=" content" className="input input-bordered w-full" />
+      <input
+        {...register("content")}
+        placeholder=" content"
+        className="input input-bordered w-full"
+      />
 
       <label className="block text-sm font-medium text-gray-700">Tags</label>
       <input
         type="text"
         placeholder="tags"
-        onChange={(e) => setTags(e.target.value.split(",").map(tag => tag.trim()))}
+        onChange={(e) =>
+          setTags(e.target.value.split(",").map((tag) => tag.trim()))
+        }
         className="input input-bordered w-full"
       />
 
